@@ -22,6 +22,6 @@ JWT_SECRET=
 
 You can add a random secret value for JWT_SECRET.
 
-## Step 3: Run the project by following command
+## Step 4: Run the project by following command
 
 `npm run dev`
