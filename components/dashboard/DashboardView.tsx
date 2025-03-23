@@ -12,75 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { StatsGrid } from "./StatsGrid";
+import { DashboardDatatype } from "@/types/dashboard";
 
-// Mock data
-const data = {
-  totalLocations: 12,
-  activeLocations: 10,
-  totalDevices: 45,
-  activeDevices: 42,
-  recentLocations: [
-    {
-      id: "1",
-      title: "Headquarters",
-      address: "123 Main St, New York, NY",
-      status: "Active",
-      deviceCount: 8,
-    },
-    {
-      id: "2",
-      title: "Branch Office",
-      address: "456 Park Ave, Boston, MA",
-      status: "Active",
-      deviceCount: 5,
-    },
-    {
-      id: "3",
-      title: "Retail Store",
-      address: "789 Market St, San Francisco, CA",
-      status: "Inactive",
-      deviceCount: 3,
-    },
-  ],
-  recentDevices: [
-    {
-      id: "1",
-      serialNumber: "POS-001-2023",
-      type: "pos",
-      location: "Headquarters",
-      status: "Active",
-    },
-    {
-      id: "2",
-      serialNumber: "KIOSK-002-2023",
-      type: "kiosk",
-      location: "Branch Office",
-      status: "Active",
-    },
-    {
-      id: "3",
-      serialNumber: "SIGN-003-2023",
-      type: "signage",
-      location: "Retail Store",
-      status: "Inactive",
-    },
-  ],
-};
-
-const chartData = [
-  { month: "January", devices: 186, locations: 80 },
-  { month: "February", devices: 305, locations: 200 },
-  { month: "March", devices: 237, locations: 120 },
-  { month: "April", devices: 73, locations: 190 },
-  { month: "May", devices: 209, locations: 130 },
-  { month: "June", devices: 214, locations: 140 },
-  { month: "Jul", devices: 186, locations: 80 },
-  { month: "Aug", devices: 305, locations: 200 },
-  { month: "Sep", devices: 237, locations: 120 },
-  { month: "Oct", devices: 73, locations: 190 },
-  { month: "Nov", devices: 209, locations: 130 },
-  { month: "Dec", devices: 214, locations: 140 },
-];
 const chartConfig = {
   devices: {
     label: "Devices",
@@ -92,7 +25,74 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const DashboardView = () => {
+interface Props {
+  data: DashboardDatatype;
+}
+
+const DashboardView: React.FC<Props> = ({ data }) => {
+  const chartData = [
+    {
+      month: "January",
+      devices: data.chartData[0].devices,
+      locations: data.chartData[0].locations,
+    },
+    {
+      month: "February",
+      devices: data.chartData[1].devices,
+      locations: data.chartData[1].locations,
+    },
+    {
+      month: "March",
+      devices: data.chartData[2].devices,
+      locations: data.chartData[2].locations,
+    },
+    {
+      month: "April",
+      devices: data.chartData[3].devices,
+      locations: data.chartData[3].locations,
+    },
+    {
+      month: "May",
+      devices: data.chartData[4].devices,
+      locations: data.chartData[4].locations,
+    },
+    {
+      month: "June",
+      devices: data.chartData[5].devices,
+      locations: data.chartData[5].locations,
+    },
+    {
+      month: "Jul",
+      devices: data.chartData[6].devices,
+      locations: data.chartData[6].locations,
+    },
+    {
+      month: "Aug",
+      devices: data.chartData[7].devices,
+      locations: data.chartData[7].locations,
+    },
+    {
+      month: "Sep",
+      devices: data.chartData[8].devices,
+      locations: data.chartData[8].locations,
+    },
+    {
+      month: "Oct",
+      devices: data.chartData[9].devices,
+      locations: data.chartData[9].locations,
+    },
+    {
+      month: "Nov",
+      devices: data.chartData[10].devices,
+      locations: data.chartData[10].locations,
+    },
+    {
+      month: "Dec",
+      devices: data.chartData[11].devices,
+      locations: data.chartData[11].locations,
+    },
+  ];
+
   return (
     <div className="flex flex-col">
       <PageHeader

@@ -1,13 +1,9 @@
 import { MapPin, Tablet, AlertTriangle } from "lucide-react";
 import { StatsCard } from "./StatsCard";
+import { DashboardDatatype } from "@/types/dashboard";
 
 interface StatsGridProps {
-  data: {
-    totalLocations: number;
-    activeLocations: number;
-    totalDevices: number;
-    activeDevices: number;
-  };
+  data: DashboardDatatype;
 }
 
 export const StatsGrid = ({ data }: StatsGridProps) => {
@@ -16,32 +12,21 @@ export const StatsGrid = ({ data }: StatsGridProps) => {
       <StatsCard
         title="Total Locations"
         value={data.totalLocations}
-        description={`${data.activeLocations} active, ${
-          data.totalLocations - data.activeLocations
-        } inactive`}
         icon={MapPin}
       />
       <StatsCard
         title="Total Devices"
         value={data.totalDevices}
-        description={`${data.activeDevices} active, ${
-          data.totalDevices - data.activeDevices
-        } inactive`}
         icon={Tablet}
       />
       <StatsCard
         title="Devices per Location"
         value={(data.totalDevices / data.totalLocations).toFixed(1)}
-        description="Average across all locations"
         icon={MapPin}
       />
       <StatsCard
         title="Inactive Devices"
-        value={data.totalDevices - data.activeDevices}
-        description={`${(
-          ((data.totalDevices - data.activeDevices) / data.totalDevices) *
-          100
-        ).toFixed(1)}% of total devices`}
+        value={data.inactiveDevices}
         icon={AlertTriangle}
       />
     </div>

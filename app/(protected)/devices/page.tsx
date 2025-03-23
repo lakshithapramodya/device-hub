@@ -14,8 +14,6 @@ const Page: React.FC<Props> = async ({ searchParams }) => {
 
   const data = await getAllDevices(page);
 
-  console.log(data.data);
-
   return <DevicesView data={data} />;
 };
 
