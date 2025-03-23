@@ -2,7 +2,7 @@ import React from "react";
 
 import Logo from "../Logo";
 import NavbarTitle from "./NavbarTitle";
-import { LogOut } from "lucide-react";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
   return (
@@ -10,9 +10,7 @@ const Navbar = () => {
       <Logo className="lg:hidden" />
       <NavbarTitle />
 
-      <button className="flex items-center justify-center cursor-pointer">
-        <LogOut className="size-6 text-gray-700" />
-      </button>
+      <LogoutButton />
     </nav>
   );
 };

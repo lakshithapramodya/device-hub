@@ -1,4 +1,4 @@
-import type { CommonResponseDataType } from "@/types/common";
+import { ResponseStatus, type CommonResponseDataType } from "@/types/common";
 import { useSuccessModal } from "./useSuccessModal";
 import { useWarningModal } from "./useWarningModal";
 
@@ -19,7 +19,9 @@ export const useActions = () => {
       function: async () => {
         const response = await func();
 
-        if (response.status === "SUCCESS") {
+        console.log(response);
+
+        if (response.status === ResponseStatus.SUCCESS) {
           setSuccessData({
             title: successText,
             backButtonText: "Continue",

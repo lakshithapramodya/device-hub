@@ -13,9 +13,13 @@ import {
 import { Button } from "../ui/button";
 import { LocationDataType } from "@/types/locations";
 import AddEditLocation from "./AddEditLocation";
+import { useActions } from "@/hooks/useActions";
+import { deleteLocation } from "@/actions/locations";
 
 const Actions = ({ data }: { data: LocationDataType }) => {
   const [open, setOpen] = useState(false);
+
+  const { handleAction } = useActions();
 
   return (
     <Fragment>
@@ -31,7 +35,15 @@ const Actions = ({ data }: { data: LocationDataType }) => {
             <Pencil className="mr-2 h-4 w-4" />
             <span>Edit</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}}>
+          <DropdownMenuItem
+            onClick={() =>
+              handleAction(
+                async () => deleteLocation(data.id),
+                `Are you sure you want to delete this location?`,
+                `You have successfully deleted the location`
+              )
+            }
+          >
             <Trash2 className="mr-2 h-4 w-4" />
             <span>Delete</span>
           </DropdownMenuItem>

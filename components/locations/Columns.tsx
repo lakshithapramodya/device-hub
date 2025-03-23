@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 
 import { Badge } from "../ui/badge";
 import Actions from "./Actions";
@@ -8,22 +9,18 @@ import { LocationDataType } from "@/types/locations";
 
 export const columns: ColumnDef<LocationDataType>[] = [
   {
-    accessorKey: "serialNumber",
-    header: ({ column }) => (
-      <div onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-        Serial Number
-      </div>
-    ),
-    cell: ({ row }) => <div className="">{row.original.serialNumber}</div>,
-  },
-  {
     accessorKey: "name",
     header: ({ column }) => (
-      <div onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+      <div
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="pl-4"
+      >
         Name
       </div>
     ),
-    cell: ({ row }) => <div className="capitalize">{row.original.name}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize pl-4">{row.original.title}</div>
+    ),
   },
   {
     accessorKey: "address",
@@ -50,7 +47,7 @@ export const columns: ColumnDef<LocationDataType>[] = [
         Created At
       </div>
     ),
-    cell: ({ row }) => <div>{row.original.createdAt}</div>,
+    cell: ({ row }) => <div>{format(row.original.createdAt, "dd/MM/yy")}</div>,
   },
   {
     accessorKey: "status",

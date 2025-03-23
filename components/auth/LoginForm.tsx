@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Loader2Icon } from "lucide-react";
+import toast from "react-hot-toast";
 
 import {
   Form,
@@ -19,6 +20,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 
 import Logo from "@/components/common/Logo";
+import { useRouter } from "next/navigation";
+import { login } from "@/lib/authentication";
+import { ResponseStatus } from "@/types/common";
 
 const formSchema = z.object({
   email: z
@@ -38,16 +42,30 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
+  const [isRemember, setIsRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const res = await login({ ...values, isRemember });
 
-    window.location.href = "/dashboard";
+    // If success redirect the user to dashboard
+    if (res.status === ResponseStatus.SUCCESS) {
+      toast.success("Login Successfully!");
+
+      router.push("/");
+    } else {
+      toast.error(res.message);
+    }
   };
 
   const action: () => void = form.handleSubmit(onSubmit);
@@ -112,15 +130,17 @@ const LoginForm = () => {
                 )}
               />
             </div>
-            <div className="w-full flex items-center justify-between gap-1.5 3xl:gap-2">
-              <div className="flex flex-row items-center justify-center gap-2.5 3xl:gap-3.5">
+            <div className="w-full flex items-center justify-between gap-1.5 2xl:gap-2">
+              <div className="flex flex-row items-center justify-center gap-2.5 2xl:gap-3.5">
                 <Checkbox
                   id="remember"
-                  className="size-4 2xl:size-5 data-[state=checked]:bg-gray-600 data-[state=checked]:border-none cursor-pointer"
+                  className="size-4 2xl:size-5 data-[state=checked]:bg-black data-[state=checked]:border-none cursor-pointer"
+                  checked={isRemember}
+                  onCheckedChange={(checked) => setIsRemember(Boolean(checked))}
                 />
                 <label
                   htmlFor="remember"
-                  className="text-xs 2xl:text-base font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-600"
+                  className="text-xs 2xl:text-base font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black"
                 >
                   Remember Password
                 </label>
@@ -130,10 +150,10 @@ const LoginForm = () => {
           <Button
             type="submit"
             disabled={form.formState.isSubmitting}
-            className="w-full rounded-2xl 2xl:rounded-3xl font-semibold text-base 2xl:text-xl h-10 2xl:h-14 bg-black text-white"
+            className="w-full rounded-2xl 2xl:rounded-3xl font-semibold text-base 2xl:text-xl h-10 2xl:h-14 bg-black text-white disabled:opacity-75"
           >
             {form.formState.isSubmitting ? (
-              <Loader2Icon className="size-6 2xl:size-8 animate-spin" />
+              <Loader2Icon className="size-6 2xl:size-8 animate-spin text-white" />
             ) : (
               "Login"
             )}
