@@ -10,18 +10,13 @@ export enum DeviceType {
 }
 
 export type DeviceDataType = {
+  id: string;
   serialNumber: string;
   name: string;
   description: string;
-  image: string;
+  locationId: string;
+  imageUrl: string;
   type: DeviceType;
   createdAt: string;
   status: DeviceStatus;
 };
-
-export interface DeviceFormData {
-  name: string;
-  description: string;
-  type: DeviceType;
-  image: string;
-}

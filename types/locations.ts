@@ -1,3 +1,5 @@
+import { DeviceDataType } from "./devices";
+
 export enum LocationStatus {
   Active = "Active",
   Inactive = "Inactive",
@@ -9,5 +11,6 @@ export type LocationDataType = {
   address: string;
   devices: number;
   createdAt: string;
+  Device?: DeviceDataType[];
   status: LocationStatus;
 };
