@@ -116,22 +116,33 @@ export function ViewLocationDialog({
                   <TableHeader>
                     <TableRow>
                       <TableHead>Name</TableHead>
-                      <TableHead>Serial Number</TableHead>
-                      <TableHead>Type</TableHead>
+                      <TableHead className="hidden md:table-cell">
+                        Serial Number
+                      </TableHead>
+                      <TableHead className="hidden sm:table-cell">
+                        Type
+                      </TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead>Created At</TableHead>
+                      <TableHead className="hidden lg:table-cell">
+                        Created At
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {location.Device.map((device) => (
                       <TableRow key={device.id}>
                         <TableCell className="font-medium">
-                          {device.name}
+                          <div className="flex flex-col">
+                            <span>{device.name}</span>
+                            <span className="md:hidden text-xs text-muted-foreground font-mono">
+                              {device.serialNumber}
+                            </span>
+                          </div>
                         </TableCell>
-                        <TableCell className="font-mono text-xs">
+                        <TableCell className="hidden md:table-cell font-mono text-xs">
                           {device.serialNumber}
                         </TableCell>
-                        <TableCell className="capitalize">
+                        <TableCell className="hidden sm:table-cell">
                           {device.type}
                         </TableCell>
                         <TableCell>
@@ -139,7 +150,7 @@ export function ViewLocationDialog({
                             {device.status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-xs">
+                        <TableCell className="hidden lg:table-cell text-xs">
                           {new Date(device.createdAt).toLocaleDateString()}
                         </TableCell>
                       </TableRow>

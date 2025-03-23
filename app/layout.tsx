@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("antialiased", inter.className)}>
+      <body className={cn("antialiased bg-gray-100", inter.className)}>
         {children}
         <Toaster
           position="top-right"

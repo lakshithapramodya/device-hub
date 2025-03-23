@@ -4,16 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface StatsCardProps {
   title: string;
   value: number | string;
-  description: string;
   icon: LucideIcon;
 }
 
-export const StatsCard = ({
-  title,
-  value,
-  description,
-  icon: Icon,
-}: StatsCardProps) => {
+export const StatsCard = ({ title, value, icon: Icon }: StatsCardProps) => {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-3">
@@ -22,7 +16,6 @@ export const StatsCard = ({
       </CardHeader>
       <CardContent>
         <div className="text-3xl font-bold">{value}</div>
-        <p className="text-base text-muted-foreground">{description}</p>
       </CardContent>
     </Card>
   );

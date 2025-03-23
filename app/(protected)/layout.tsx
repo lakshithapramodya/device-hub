@@ -13,7 +13,7 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <div className="flex w-full lg:h-screen max-lg:overflow-y-auto overflow-x-hidden lg:overflow-hidden z-0">
+      <div className="flex w-full h-[calc(100vh-70px)] lg:h-screen max-lg:overflow-y-auto overflow-x-hidden lg:overflow-hidden z-0">
         <Sidebar />
         <div className="flex flex-col w-full lg:w-[calc(100vw-240px)] bg-gray-100 lg:h-screen overflow-y-auto">
           <Navbar />
