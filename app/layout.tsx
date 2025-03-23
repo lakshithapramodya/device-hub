@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
             zIndex: 2147483647,
           }}
         />
+        <ModalProvider />
       </body>
     </html>
   );

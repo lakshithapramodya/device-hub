@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { useSuccessModal } from "@/hooks/useSuccessModal";
@@ -22,6 +22,7 @@ const SuccessModal = () => {
   return (
     <Dialog open={openSuccessModal} onOpenChange={handleClose}>
       <DialogContent className="gap-0 p-5 w-[320px] max-w-full">
+        <DialogTitle className="hidden">Success Modal</DialogTitle>
         <CircleCheck className="size-14 text-green-500 mx-auto mt-10" />
         <p className="text-center text-[#757575] font-medium text-sm mt-5 text-wrap">
           {successData.title}
@@ -32,7 +33,7 @@ const SuccessModal = () => {
           </p>
         )}
         <Button
-          className="w-full bg-green-500 text-white h-10 text-base font-semibold rounded-[8px] mt-2.5"
+          className="w-full bg-green-500 hover:bg-green-400 text-white h-10 text-base font-semibold rounded-[8px] mt-2.5"
           onClick={() => {
             successData.function();
             handleClose();

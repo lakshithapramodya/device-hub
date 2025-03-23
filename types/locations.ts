@@ -4,8 +4,8 @@ export enum LocationStatus {
 }
 
 export type LocationDataType = {
-  serialNumber: string;
-  name: string;
+  id: string;
+  title: string;
   address: string;
   devices: number;
   createdAt: string;
