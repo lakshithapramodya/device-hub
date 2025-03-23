@@ -1,15 +1,15 @@
 "use server";
 
 import { CommonResponseDataType, ResponseStatus } from "@/types/common";
-import { LocationDataType } from "@/types/locations";
+import { DeviceDataType, DeviceType } from "@/types/devices";
 import axios from "@/utils/axios";
 import { revalidatePath } from "next/cache";
 
-export const getAllLocations = async (
+export const getAllDevices = async (
   page?: string
-): Promise<{ data: LocationDataType[]; total: number }> => {
+): Promise<{ data: DeviceDataType[]; total: number }> => {
   try {
-    const res = await axios.get("/api/v1/location", {
+    const res = await axios.get("/api/v1/device", {
       params: { page },
     });
 
@@ -24,30 +24,21 @@ export const getAllLocations = async (
   }
 };
 
-export const getAllDevicesForSelect = async (): Promise<LocationDataType[]> => {
+export const createDevice = async (data: {
+  serialNumber: string;
+  name: string;
+  type: DeviceType;
+  imageUrl: string;
+  locationId: string;
+  description?: string;
+}): Promise<CommonResponseDataType> => {
   try {
-    const res = await axios.get("/api/v1/location/all");
-
-    return res.data.data;
-  } catch (error) {
-    console.log(error);
-
-    return [];
-  }
-};
-
-export const createLocation = async (
-  title: string,
-  address: string
-): Promise<CommonResponseDataType> => {
-  try {
-    const res = await axios.post(`/api/v1/location`, {
-      title,
-      address,
+    const res = await axios.post(`/api/v1/device`, {
+      ...data,
       status: "Active",
     });
 
-    revalidatePath("/locations");
+    revalidatePath("/devices");
 
     return res.data;
   } catch (error) {
@@ -62,18 +53,21 @@ export const createLocation = async (
   }
 };
 
-export const updateLocation = async (
+export const updateDevice = async (
   id: string,
-  title: string,
-  address: string
+  data: {
+    serialNumber: string;
+    name: string;
+    type: DeviceType;
+    imageUrl: string;
+    locationId: string;
+    description?: string;
+  }
 ): Promise<CommonResponseDataType> => {
   try {
-    const res = await axios.patch(`/api/v1/location/${id}`, {
-      title,
-      address,
-    });
+    const res = await axios.patch(`/api/v1/device/${id}`, data);
 
-    revalidatePath("/locations");
+    revalidatePath("/devices");
 
     return res.data;
   } catch (error) {
@@ -88,13 +82,13 @@ export const updateLocation = async (
   }
 };
 
-export const deleteLocation = async (
+export const deleteDevice = async (
   id: string
 ): Promise<CommonResponseDataType> => {
   try {
-    const res = await axios.delete(`/api/v1/location/${id}`);
+    const res = await axios.delete(`/api/v1/device/${id}`);
 
-    revalidatePath("/locations");
+    revalidatePath("/devices");
 
     return res.data;
   } catch (error) {

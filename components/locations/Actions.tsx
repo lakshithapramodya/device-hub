@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from "react";
 
-import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -15,9 +15,11 @@ import { LocationDataType } from "@/types/locations";
 import AddEditLocation from "./AddEditLocation";
 import { useActions } from "@/hooks/useActions";
 import { deleteLocation } from "@/actions/locations";
+import { ViewLocationDialog } from "./ViewLocationDialog";
 
 const Actions = ({ data }: { data: LocationDataType }) => {
   const [open, setOpen] = useState(false);
+  const [openView, setOpenView] = useState(false);
 
   const { handleAction } = useActions();
 
@@ -31,6 +33,11 @@ const Actions = ({ data }: { data: LocationDataType }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setOpenView(true)}>
+            <Eye className="mr-2 h-4 w-4" />
+            <span>View</span>
+          </DropdownMenuItem>
+
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Pencil className="mr-2 h-4 w-4" />
             <span>Edit</span>
@@ -51,6 +58,11 @@ const Actions = ({ data }: { data: LocationDataType }) => {
       </DropdownMenu>
 
       <AddEditLocation open={open} setOpen={setOpen} data={data} />
+      <ViewLocationDialog
+        open={openView}
+        setOpen={setOpenView}
+        location={data}
+      />
     </Fragment>
   );
 };

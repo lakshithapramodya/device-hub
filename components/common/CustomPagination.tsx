@@ -29,10 +29,10 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   const buttons = [];
 
   const buttonClass =
-    "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-white font-normal bg-[#94C1AF] cursor-pointer";
+    "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-white font-normal bg-black cursor-pointer";
 
   const inactiveClass =
-    "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-[#212121] font-normal bg-[#EEEEEE] disabled:!opacity-100";
+    "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-black font-normal bg-white disabled:!opacity-100";
 
   const totalPages = Math.ceil((totalCount ?? itemsPerPage) / itemsPerPage);
 
@@ -121,8 +121,8 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
     const className = cn(
       buttonClass,
       currentPage === i
-        ? "bg-[#94C1AF] text-white border-none"
-        : "bg-[#EEEEEE] text-[#212121] border-none"
+        ? "bg-black text-white border-none"
+        : "bg-white text-black border-none"
     );
 
     return createButton(i, variant, onClick, className, i + 1);
@@ -177,7 +177,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-row items-center gap-[9px] 3xl:!gap-[12px] mx-auto",
+        "flex flex-row items-center gap-[9px] 3xl:!gap-[12px] ml-auto",
         totalPages > 5 && "justify-evenly w-full",
         className
       )}
@@ -186,12 +186,12 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         aria-label="Go to previous page"
         variant="outline"
         size="icon"
-        className="size-9 3xl:!size-12 bg-[#EEEEEE] border-none disabled:opacity-50 cursor-pointer"
+        className="size-9 3xl:!size-12 bg-white border-none disabled:opacity-50 cursor-pointer"
         onClick={handleNavigateFirstPage}
         disabled={currentPage === 0}
       >
         <ChevronsLeft
-          className="size-[18px] 3xl:!size-6 text-[#BDBDBD]"
+          className="size-[18px] 3xl:!size-6 text-black"
           aria-hidden="true"
         />
       </Button>
@@ -205,7 +205,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           className={cn(
             buttonClass,
             currentPage === 0 &&
-              "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-white font-normal bg-[#94C1AF] cursor-pointer"
+              "size-9 3xl:!size-12 text-[12px] 3xl:!text-[16px] text-white font-normal bg-black cursor-pointer"
           )}
         >
           1
@@ -215,7 +215,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         aria-label="Go to next page"
         variant="outline"
         size="icon"
-        className="size-9 3xl:!size-12 bg-[#EEEEEE] border-none disabled:opacity-50 cursor-pointer"
+        className="size-9 3xl:!size-12 bg-white border-none disabled:opacity-50 cursor-pointer"
         onClick={handleNavigateLastPage}
         disabled={currentPage + 1 === totalPages || totalPages === 0}
       >

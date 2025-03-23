@@ -61,6 +61,10 @@ const AddEditLocation: React.FC<Props> = ({ open, setOpen, data }) => {
       });
       setOpenSuccessModal(true);
       setOpen(false);
+      form.reset({
+        title: "",
+        address: "",
+      });
     } else {
       toast.error(res.message);
     }

@@ -5,16 +5,20 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "../ui/badge";
 import Actions from "./Actions";
 import { DeviceDataType } from "@/types/devices";
+import { format } from "date-fns";
 
 export const columns: ColumnDef<DeviceDataType>[] = [
   {
     accessorKey: "serialNumber",
     header: ({ column }) => (
-      <div onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+      <div
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="pl-4"
+      >
         Serial Number
       </div>
     ),
-    cell: ({ row }) => <div className="">{row.original.serialNumber}</div>,
+    cell: ({ row }) => <div className="pl-4">{row.original.serialNumber}</div>,
   },
   {
     accessorKey: "name",
@@ -43,7 +47,7 @@ export const columns: ColumnDef<DeviceDataType>[] = [
         Devices
       </div>
     ),
-    cell: ({ row }) => <div>{row.original.type}</div>,
+    cell: ({ row }) => <div className="capitalize">{row.original.type}</div>,
   },
   {
     accessorKey: "createdAt",
@@ -52,7 +56,7 @@ export const columns: ColumnDef<DeviceDataType>[] = [
         Created At
       </div>
     ),
-    cell: ({ row }) => <div>{row.original.createdAt}</div>,
+    cell: ({ row }) => <div>{format(row.original.createdAt, "dd/MM/yy")}</div>,
   },
   {
     accessorKey: "status",
