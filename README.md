@@ -20,7 +20,7 @@ JWT_SECRET=
 
 ```
 
-You can add a random secret value for JWT_SECRET.
+You can add a random secret value for JWT_SECRET and backend base url as BASE_URL value
 
 ## Step 4: Run the project by following command
 
